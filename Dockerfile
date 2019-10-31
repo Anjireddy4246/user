@@ -1,39 +1,20 @@
-# Stage 1
-FROM node:alpine AS builder
+# Start with a base image containing Java runtime
+FROM openjdk:8-jdk-alpine
 
-# install chrome for protractor tests
-# Install Google Chrome
-#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-#RUN apt-get update && apt-get install -y google-chrome-stable
+# Add Maintainer Info
+LABEL maintainer="techmonks@gmail.com"
 
-#apk add --update --no-cache gifsicle ttf-freefont optipng libjpeg-turbo-utils udev chromium
-#export CHROME_BIN=/usr/bin/chromium-browser
-WORKDIR /app
+# Add a volume pointing to /user-service
+VOLUME /user-service
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
 
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@7.3.9
+# The application's jar file
+ARG JAR_FILE=build/libs/userservice-0.0.1-SNAPSHOT.jar
 
-COPY . .
-RUN npm install
-RUN npm run postinstall && \
-    npm run build
+# Add the application's jar to the container
+ADD ${JAR_FILE} userservice.jar
 
-#Stage 2
-FROM nginx:alpine
-
-## Copy our default nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/
-
-## Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
-## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
-#EXPOSE 80
-
-#Run NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Run the jar file 
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/userservice.jar"]
