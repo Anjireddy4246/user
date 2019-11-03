@@ -29,4 +29,4 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: com.unittest.user.kafka.serde.JsonSerializer
+      value-serializer: com.ts.user.kafka.serde.JsonSerializer
