@@ -1,10 +1,8 @@
 package com.ts.user.service.impl.v1;
 
-
-
 import com.ts.user.entity.User;
-import com.ts.user.repository.v1.UserRepository;
 import com.ts.user.service.v1.UserService;
+import com.ts.user.repository.v1.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
