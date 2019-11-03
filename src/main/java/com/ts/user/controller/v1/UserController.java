@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -55,13 +56,27 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id) {
         Optional<User> userOpt = userService.getById();
+        create();
         LOGGER.info("information message");
-        helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
+        //helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
         if (userOpt.isPresent()) {
             return ResponseEntity.ok(userOpt.get());
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    public void create(){
+        User user=new User();
+        user.setEmail("anjireddy.kata@gmail.com");
+        user.setLoginId("technosoft");
+        user.setFirstName("William");
+        user.setLastName("Ferguson");
+        user.setPassword("technosoft");
+        user.setCreatedBy(1L);
+        user.setCreatedDate(new Date());
+        userService.create(user);
+
     }
 
     private MessageReceivedEvent getMessageReceivedEvent() {

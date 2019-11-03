@@ -1,24 +1,24 @@
 package com.ts.user.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "User")
 public class User implements java.io.Serializable {
 
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String middleName;
     private String email;
-    private Date createdDate;
+    private String loginId;
+    private String password;
+    private String passwordSalt;
     private Long createdBy;
+    private Date createdDate;
     private Long updatedBy;
     private Date updatedDate;
     private Integer rowStatusId;
@@ -26,32 +26,31 @@ public class User implements java.io.Serializable {
     public User() {
     }
 
-    public User(long id) {
-        this.id = id;
-    }
-
-    public User(long id, String firstName, String lastName, String middleName, String email, Date createdDate,
-                Long createdBy, Long updatedBy, Date updatedDate, Integer rowStatusId) {
-        this.id = id;
+    public User(String firstName, String lastName, String middleName, String email, String loginId, String password,
+                String passwordSalt, Long createdBy, Date createdDate, Long updatedBy, Date updatedDate,
+                Integer rowStatusId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.email = email;
-        this.createdDate = createdDate;
+        this.loginId = loginId;
+        this.password = password;
+        this.passwordSalt = passwordSalt;
         this.createdBy = createdBy;
+        this.createdDate = createdDate;
         this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
         this.rowStatusId = rowStatusId;
     }
 
     @Id
-
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,14 +90,31 @@ public class User implements java.io.Serializable {
         this.email = email;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CreatedDate", length = 19)
-    public Date getCreatedDate() {
-        return this.createdDate;
+    @Column(name = "LoginId", length = 100)
+    public String getLoginId() {
+        return this.loginId;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    @Column(name = "Password", length = 1000)
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name = "PasswordSalt", length = 100)
+    public String getPasswordSalt() {
+        return this.passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
     @Column(name = "CreatedBy")
@@ -108,6 +124,16 @@ public class User implements java.io.Serializable {
 
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CreatedDate", length = 19)
+    public Date getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     @Column(name = "UpdatedBy")
