@@ -58,7 +58,7 @@ public class UserController {
         Optional<User> userOpt = userService.getById();
         create();
         LOGGER.info("information message");
-        //helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
+        helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
         if (userOpt.isPresent()) {
             return ResponseEntity.ok(userOpt.get());
         } else {
