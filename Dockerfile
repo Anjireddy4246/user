@@ -1,6 +1,8 @@
 # Start with a base image containing Java runtime
 FROM openjdk:8-jdk-alpine
 
+ARG CACHEBUST=1
+
 # Add Maintainer Info
 LABEL maintainer="techmonks@gmail.com"
 
