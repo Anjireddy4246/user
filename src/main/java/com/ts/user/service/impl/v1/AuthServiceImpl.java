@@ -22,15 +22,16 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponseModel login(LoginModel loginModel) {
         Optional<User> user = userService.getByLoginId(loginModel.getLoginId());
         LoginResponseModel loginResponseModel = new LoginResponseModel();
+        boolean isValid = false;
         if (user.isPresent()) {
             User userInfo = user.get();
-            boolean isMatch = PasswordUtil.validatePassword(loginModel.getPassword(),
+            isValid = PasswordUtil.validatePassword(loginModel.getPassword(),
                     userInfo.getPasswordSalt(), userInfo.getPassword());
-            if (isMatch) {
-                loginResponseModel.setAuthToken(UUID.randomUUID().toString());
-            } else {
-                loginResponseModel.setErrorMessage("Invalid Credentials");
-            }
+        }
+        if (isValid) {
+            loginResponseModel.setAuthToken(UUID.randomUUID().toString());
+        } else {
+            loginResponseModel.setErrorMessage("Invalid Credentials");
         }
         return loginResponseModel;
     }

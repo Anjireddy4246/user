@@ -58,7 +58,7 @@ public class UserController {
         Optional<User> userOpt = userService.getById();
         create();
         LOGGER.info("information message");
-        helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
+        //helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
         if (userOpt.isPresent()) {
             return ResponseEntity.ok(userOpt.get());
         } else {
@@ -79,12 +79,12 @@ public class UserController {
 
     }
 
-    private MessageReceivedEvent getMessageReceivedEvent() {
-        MessageReceivedEvent mre = new MessageReceivedEvent();
-        HelloWorldModel hwm = new HelloWorldModel();
-        hwm.setId(1L);
-        hwm.setGuid(UUID.randomUUID().toString());
-        mre.setHelloWorldModel(hwm);
-        return mre;
-    }
+//    private MessageReceivedEvent getMessageReceivedEvent() {
+//        MessageReceivedEvent mre = new MessageReceivedEvent();
+//        HelloWorldModel hwm = new HelloWorldModel();
+//        hwm.setId(1L);
+//        hwm.setGuid(UUID.randomUUID().toString());
+//        mre.setHelloWorldModel(hwm);
+//        return mre;
+//    }
 }
