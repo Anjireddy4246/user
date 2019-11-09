@@ -66,18 +66,18 @@ public class UserController {
         }
     }
 
-    public void create(){
-        User user=new User();
-        user.setEmail("anjireddy.kata@gmail.com");
-        user.setLoginId("technosoft");
-        user.setFirstName("William");
-        user.setLastName("Ferguson");
-        user.setPassword("technosoft");
-        user.setCreatedBy(1L);
-        user.setCreatedDate(new Date());
-        userService.create(user);
-
-    }
+//    public void create(){
+//        User user=new User();
+//        user.setEmail("anjireddy.kata@gmail.com");
+//        user.setLoginId("technosoft");
+//        user.setFirstName("William");
+//        user.setLastName("Ferguson");
+//        user.setPassword("technosoft");
+//        user.setCreatedBy(1L);
+//        user.setCreatedDate(new Date());
+//        userService.create(user);
+//
+//    }
 
 //    private MessageReceivedEvent getMessageReceivedEvent() {
 //        MessageReceivedEvent mre = new MessageReceivedEvent();

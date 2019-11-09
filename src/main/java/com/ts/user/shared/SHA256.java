@@ -1,16 +1,20 @@
 package com.ts.user.shared;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SHA256 {
+    private static  final Logger LOGGER = LoggerFactory.getLogger(SHA256.class);
     public static String computeHash(String stringToHash){
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+          LOGGER.error( e.toString());
         }
         byte[] encodedHash = digest.digest(
                 stringToHash.getBytes(StandardCharsets.UTF_8));
