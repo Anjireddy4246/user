@@ -16,7 +16,7 @@ spring:
           auto: none
         enable_lazy_load_no_trans: true
   datasource:
-    url: jdbc:mysql://13.233.198.21:3306/user
+    url: jdbc:mysql://13.126.195.122:3306/user
     username: root
     password: TS@001002
     driver-class-name: com.mysql.jdbc.Driver
