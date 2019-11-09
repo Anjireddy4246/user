@@ -56,7 +56,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id) {
         Optional<User> userOpt = userService.getById();
-        create();
+        //create();
         LOGGER.info("information message");
         //helloWorldEventSender.send("messageReceivedEvent", getMessageReceivedEvent());
         if (userOpt.isPresent()) {
