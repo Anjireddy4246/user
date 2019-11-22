@@ -73,7 +73,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/errors")
-    public ResponseEntity<String> allUsersByID() {
+    public ResponseEntity<String> errors() {
         try{
             throw new RuntimeException("Run time error exceptions");
         }
