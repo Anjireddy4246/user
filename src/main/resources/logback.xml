@@ -36,7 +36,7 @@
                 </timestamp>
                 <pattern>
                     <pattern>
-                        { "severity": "%level", "service": "${springAppName}", "trace": "%X{X-B3-TraceId:-}", "span": "%X{X-B3-SpanId:-}", "parent": "%X{X-B3-ParentSpanId:-}", "exportable": "%X{X-Span-Export:-}", "pid": "-", "thread": "%thread", "class": "%logger{40}", "rest": "%message" }
+                        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  [${springAppName},%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export},%X{X-ErrorType},%X{X-RequestPath},%X{X-IPAddress},%X{user}] %-5p [%t] %C{2} - %m%n</pattern>
                     </pattern>
                 </pattern>
             </providers>

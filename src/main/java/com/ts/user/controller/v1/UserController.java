@@ -6,6 +6,7 @@ import com.ts.user.model.v1.HelloWorldModel;
 import com.ts.user.service.v1.UserService;
 import com.ts.user.kafka.event.v1.MessageReceivedEvent;
 import com.ts.user.kafka.producer.HelloWorldEventSender;
+import com.ts.user.shared.MDCUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,23 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     * Get all the users
+     *
+     * @return
+     */
+    @GetMapping("/errors")
+    public ResponseEntity<String> allUsersByID() {
+        try{
+            throw new RuntimeException("Run time error exceptions");
+        }
+        catch (Exception ex){
+            MDCUtils.put(ex);
+            LOGGER.error("error occurred while processing the request", ex.toString());
+        }
+        return ResponseEntity.ok("error");
     }
 
 //    public void create(){
