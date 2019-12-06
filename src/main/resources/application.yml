@@ -21,7 +21,7 @@ spring:
     password: TS@001002
     driver-class-name: com.mysql.jdbc.Driver
   kafka:
-    bootstrap-servers: 15.206.79.121:9092
+    bootstrap-servers: 13.234.5.9:9092
     consumer:
       group-id: svc_name
       auto-offset-reset: earliest

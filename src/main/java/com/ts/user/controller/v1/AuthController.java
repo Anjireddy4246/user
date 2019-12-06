@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController("AuthControllerV1")
 @CrossOrigin
-@RequestMapping(value = "/v1")
+@RequestMapping(value = "/v1/")
 public class AuthController {
 
     private static  final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
@@ -23,7 +23,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<LoginResponseModel> validateCredentials(@RequestBody LoginModel loginModel) {
         LoginResponseModel loginResponseModel = authService.login(loginModel);
         return ResponseEntity.ok(loginResponseModel);
